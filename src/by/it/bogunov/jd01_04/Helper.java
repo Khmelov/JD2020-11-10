@@ -1,4 +1,4 @@
-package by.it.bogunov.jd01_03;
+package by.it.bogunov.jd01_04;
 
 class Helper {
     private static Helper Arrays;
