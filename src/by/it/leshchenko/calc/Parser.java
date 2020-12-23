@@ -18,7 +18,14 @@ public class Parser {
 
     public Var calc(String expression) throws CalcException {
         expression = expression.trim().replaceAll("\\s+", "");
-
+        while (expression.contains("(")) {
+            Matcher expressionInBrackets = Pattern.compile(Patterns.BRACKETS).matcher(expression);
+            while (expressionInBrackets.find()) {
+                final String group = expressionInBrackets.group();
+                final Var res = calc(group.replace("(", "").replace(")", ""));
+                expression = expression.replace(group, res.toString());
+            }
+        }
         final List<String> operands = new ArrayList<>(Arrays.asList(expression.split(Patterns.OPERATION)));
         final Matcher matcher = Pattern.compile(Patterns.OPERATION).matcher(expression);
         List<String> operations = new ArrayList<>();
