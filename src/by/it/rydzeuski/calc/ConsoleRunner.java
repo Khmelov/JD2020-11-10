@@ -8,13 +8,19 @@ public class ConsoleRunner {
        Scanner sc=new Scanner(System.in);
         Printer printer = new Printer();
         Parser parser=new Parser();
+        RepoVar.loadToVars();
+
         for (;;){
             String expression=sc.nextLine();
             if (expression.equals("end")){
                 break;
             }
-            Var result=parser.calc(expression);
-            printer.print(result);
+            try {
+               Var result = parser.calc(expression);
+                printer.print(result);
+            } catch (CalcException e) {
+                System.out.println(e.getMessage());
+            }
         }
 
     }
