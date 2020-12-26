@@ -9,6 +9,7 @@ import java.util.Scanner;
 public class ConsoleRunner {
 
     public static Language lang = Language.INSTANCE;
+    public static Logger logger = Logger.INSTANCE;
 
     public static void main(String[] args) {
 

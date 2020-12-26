@@ -106,13 +106,13 @@ public class Parser {
         Var left = Var.createVar(leftStr);
         switch (operation){
             case "+" :
-                Logger.getLogger().log(right + " + " + left +" = "+right.addWidth(left));
+                ConsoleRunner.logger.log(right + " + " + left +" = "+right.addWidth(left));
                 return right.addWidth(left);
-            case "-" : Logger.getLogger().log(right + " - " + left+" = "+right.subWidth(left));
+            case "-" : ConsoleRunner.logger.log(right + " - " + left+" = "+right.subWidth(left));
                 return right.subWidth(left);
-            case "*" : Logger.getLogger().log(right + " * " + left+" = "+right.mulWidth(left));
+            case "*" : ConsoleRunner.logger.log(right + " * " + left+" = "+right.mulWidth(left));
                 return right.mulWidth(left);
-            case "/" : Logger.getLogger().log(right + " / " + left+" = "+right.divWidth(left));
+            case "/" : ConsoleRunner.logger.log(right + " / " + left+" = "+right.divWidth(left));
                 return right.divWidth(left);
         }
         throw new CalcException(ConsoleRunner.lang.get(ErrorLang.ERROR));

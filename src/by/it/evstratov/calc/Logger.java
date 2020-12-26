@@ -5,30 +5,14 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.io.PrintWriter;
 
-class Logger {
+public enum Logger {
 
-    static private volatile Logger logger;
-    private Logger(){}
-    private final String logName = "log.txt";
-
-    static Logger getLogger(){
-        Logger local = logger;
-        if(local == null){
-         synchronized (Logger.class){
-             local = logger;
-             if(local == null){
-                 local = logger = new Logger();
-             }
-
-         }
-        }
-        return local;
-    }
+    INSTANCE;
 
     void log(String message) {
 
         try(PrintWriter printWriter = new PrintWriter(new FileWriter(getPath(), true))){
-            printWriter.write(message+"\n");
+            printWriter.write(Time.getTime(ConsoleRunner.lang.getLocale()) + " : " + message+"\n");
         }catch (IOException e){
             throw  new RuntimeException(e);
         }
@@ -40,6 +24,7 @@ class Logger {
         String path = Logger.class.getName()
                 .replace(Logger.class.getSimpleName(), "")
                 .replace(".", File.separator);
+        String logName = "log.txt";
         return src + path + logName;
     }
 
