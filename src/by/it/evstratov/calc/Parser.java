@@ -104,16 +104,15 @@ public class Parser {
             return Var.saveVar(leftStr, right);
         }
         Var left = Var.createVar(leftStr);
-
         switch (operation){
             case "+" :
-                RepoVar.saveToLog(right + " + " + left +" = "+right.addWidth(left));
+                Logger.getLogger().log(right + " + " + left +" = "+right.addWidth(left));
                 return right.addWidth(left);
-            case "-" : RepoVar.saveToLog(right + " - " + left+" = "+right.subWidth(left));
+            case "-" : Logger.getLogger().log(right + " - " + left+" = "+right.subWidth(left));
                 return right.subWidth(left);
-            case "*" : RepoVar.saveToLog(right + " * " + left+" = "+right.mulWidth(left));
+            case "*" : Logger.getLogger().log(right + " * " + left+" = "+right.mulWidth(left));
                 return right.mulWidth(left);
-            case "/" : RepoVar.saveToLog(right + " / " + left+" = "+right.divWidth(left));
+            case "/" : Logger.getLogger().log(right + " / " + left+" = "+right.divWidth(left));
                 return right.divWidth(left);
         }
         throw new CalcException(ConsoleRunner.lang.get(ErrorLang.ERROR));
