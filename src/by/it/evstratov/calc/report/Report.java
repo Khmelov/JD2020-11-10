@@ -16,7 +16,7 @@ public class Report {
     final StringBuilder result = new StringBuilder();
 
     void writeReport(String str){
-        result.append(str).append("\n");
+        result.append(str);
     }
 
     void printReport(){
@@ -24,13 +24,13 @@ public class Report {
     }
 
     public void endReport(){
-        writeReport("End session: " + Time.getTime(ConsoleRunner.lang.getLocale()));
+        writeReport("\n" + "End session: " + Time.getTime(ConsoleRunner.lang.getLocale()));
         printReport();
     }
 
     public void startReport(){
-        writeReport("**************REPORT**************");
-        writeReport("Start session: " + Time.getTime(ConsoleRunner.lang.getLocale()));
+        writeReport("**************REPORT**************" + "\n");
+        writeReport("Start session: " + Time.getTime(ConsoleRunner.lang.getLocale()) + "\n" + "\n");
     }
 
 
