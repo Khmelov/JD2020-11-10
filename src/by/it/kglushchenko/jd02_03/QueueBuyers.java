@@ -6,10 +6,10 @@ import java.util.concurrent.TimeUnit;
 
 public class QueueBuyers {
 
-    private final BlockingDeque<Buyer> deque ;
+    private final BlockingDeque<Buyer> deque;
 
     public QueueBuyers(int maxLength) {
-        deque=new LinkedBlockingDeque<>(maxLength);
+        deque = new LinkedBlockingDeque<>(maxLength);
     }
 
     void add(Buyer buyer) {

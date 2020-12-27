@@ -41,6 +41,8 @@ public class Market {
         // Открыли магазин
         System.out.println("Market opened");
 
+        addGoodsAndPrices(); // сформировали товары и цены
+
         /* OLD SCHOOL
         // Создали список покупателей и кассиров
         // чтобы и кассиры и покупатели были в одном List меняем Buyers на Thread

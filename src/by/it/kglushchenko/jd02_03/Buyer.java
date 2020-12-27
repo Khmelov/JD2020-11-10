@@ -50,6 +50,7 @@ class Buyer extends Thread implements IBuyer, IUseBasket {
     @Override
     public void enterToMarket() {
         System.out.println(this + " entered to Market");
+        takeBasket();
     }
 
     @Override
@@ -58,6 +59,7 @@ class Buyer extends Thread implements IBuyer, IUseBasket {
         int k = getK();         //
         sleepRandom(500, 2000); // выбирает товар
         System.out.println(this + " finished choose goods");
+        putGoodsToBasket();
     }
 
     @Override
