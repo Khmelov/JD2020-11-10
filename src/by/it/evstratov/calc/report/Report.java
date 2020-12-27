@@ -15,16 +15,15 @@ public class Report {
 
     final StringBuilder result = new StringBuilder();
 
-    public void writeReport(String str){
+    void writeReport(String str){
         result.append(str).append("\n");
     }
 
-    public void printReport(){
+    void printReport(){
         System.out.println(result);
     }
 
     public void endReport(){
-        result.append("\n");
         writeReport("End session: " + Time.getTime(ConsoleRunner.lang.getLocale()));
         printReport();
     }
@@ -32,7 +31,6 @@ public class Report {
     public void startReport(){
         writeReport("**************REPORT**************");
         writeReport("Start session: " + Time.getTime(ConsoleRunner.lang.getLocale()));
-        result.append("\n");
     }
 
 

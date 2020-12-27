@@ -8,7 +8,7 @@ abstract public class ReportBuilder {
     void createReport(){
         report = Report.getInstance();
     }
-    Report getReport(){
+    public Report getReport(){
         return report;
     }
     public abstract void writeError(CalcException e);

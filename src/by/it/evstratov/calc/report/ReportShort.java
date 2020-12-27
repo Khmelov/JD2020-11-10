@@ -6,6 +6,6 @@ public class ReportShort extends ReportBuilder{
 
     @Override
     public void writeError(CalcException e) {
-        report.result.append(e.getMessage()).append("\n");
+        report.writeReport(e.getMessage() + "\n");
     }
 }
