@@ -10,7 +10,6 @@ public enum Logger {
     INSTANCE;
 
     void log(String message) {
-
         try(PrintWriter printWriter = new PrintWriter(new FileWriter(getPath(), true))){
             printWriter.write(Time.getTime(ConsoleRunner.lang.getLocale()) + " : " + message+"\n");
         }catch (IOException e){
