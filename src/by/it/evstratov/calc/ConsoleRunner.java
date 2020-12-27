@@ -26,31 +26,39 @@ public class ConsoleRunner {
         Scanner scanner = new Scanner(System.in);
         RepoVar.loadVariables();
 
+        label:
         for (;;) {
             String expression = scanner.nextLine();
-            if(expression.equals("end")){
-                report.endReport();
-                break;
-            }else if(expression.equals("printvar")){
-                Var.printVar();
-            }else if(expression.equals("sortvar")){
-                Var.sortVar();
-            }else if(expression.equals(Lang.RU)){
-                lang.setLocale(new Locale("ru","RU"));
-            }else if(expression.equals(Lang.BE)){
-                lang.setLocale(new Locale("be","BY"));
-            }else if(expression.equals(Lang.EN)){
-                lang.setLocale(new Locale("en","EN"));
-            }else{
-                report.write(expression + "=");
-                try {
-                    Var result = parser.calc(expression);
-                    printer.print(result);
-                    report.write(result.toString() + "\n");
-                } catch (CalcException e) {
-                    reportBuilder.writeError(e);
-                    System.out.println(e.getMessage());
-                }
+            switch (expression) {
+                case "end":
+                    report.endReport();
+                    break label;
+                case "printvar":
+                    Var.printVar();
+                    break;
+                case "sortvar":
+                    Var.sortVar();
+                    break;
+                case Lang.RU:
+                    lang.setLocale(new Locale("ru", "RU"));
+                    break;
+                case Lang.BE:
+                    lang.setLocale(new Locale("be", "BY"));
+                    break;
+                case Lang.EN:
+                    lang.setLocale(new Locale("en", "EN"));
+                    break;
+                default:
+                    report.write(expression + "=");
+                    try {
+                        Var result = parser.calc(expression);
+                        printer.print(result);
+                        report.write(result.toString() + "\n");
+                    } catch (CalcException e) {
+                        reportBuilder.writeError(e);
+                        System.out.println(e.getMessage());
+                    }
+                    break;
             }
 
         }
