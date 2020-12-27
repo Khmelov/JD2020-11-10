@@ -8,7 +8,7 @@ import java.util.Map;
 
 public class RepoVar {
     private static final String VARS_TXT = "vars.txt";
-    private static final String LOG_TXT = "log.txt";
+    private static final String LOG_TXT = "logReport.txt";
 
     private RepoVar() {
 

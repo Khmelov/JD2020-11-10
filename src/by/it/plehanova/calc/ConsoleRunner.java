@@ -4,10 +4,10 @@ import java.util.Locale;
 import java.util.Scanner;
 
 public class ConsoleRunner {
+
     public static Lang lang = Lang.INSTANCE;
 
     public static void main(String[] args) {
-
         if (args.length == 2) {
             lang.setLocale(new Locale(args[0], args[1]));
         }
