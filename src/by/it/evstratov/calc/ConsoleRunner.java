@@ -10,7 +10,7 @@ public class ConsoleRunner {
 
     public static Language lang = Language.INSTANCE;
     public static Logger logger = Logger.INSTANCE;
-    public static Report loggerHolder = Report.getInstance();
+    Report report = Report.getInstance();
 
     public static void main(String[] args) {
 
@@ -23,8 +23,6 @@ public class ConsoleRunner {
         for (;;) {
             String expression = scanner.nextLine();
             if(expression.equals("end")){
-                loggerHolder.writeReport("End session: " + Time.getTime(ConsoleRunner.lang.getLocale()));
-                loggerHolder.printReport();
                 break;
             }else if(expression.equals("printvar")){
                 Var.printVar();
@@ -40,7 +38,6 @@ public class ConsoleRunner {
                 try {
                     Var result = parser.calc(expression);
                     printer.print(result);
-                    loggerHolder.writeReport(result.toString());
                 } catch (CalcException e) {
                     System.out.println(e.getMessage());
                 }
