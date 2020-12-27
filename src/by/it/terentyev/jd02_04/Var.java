@@ -1,4 +1,4 @@
-package by.it.terentyev.calc;
+package by.it.terentyev.jd02_04;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -6,16 +6,14 @@ import java.util.Map;
 abstract class Var implements Operation {
 
     private static final Map<String, Var> variables = new HashMap<>();
-
     public static Var save(String varName, Var varValue) {
         variables.put(varName, varValue);
         RepoVar.saveVariables(variables);
         return varValue;
     }
 
-
     public static Var createVar(String strVar) throws CalcException {
-        strVar = strVar.replaceAll("\\s+","");
+        strVar = strVar.replaceAll("\\s+", "");
         if (strVar.matches(Patterns.SCALAR)) {
             return new Scalar(strVar);
         } else if (strVar.matches(Patterns.VECTOR)) {
@@ -25,7 +23,7 @@ abstract class Var implements Operation {
         } else if (variables.containsKey(strVar)) {
             return variables.get(strVar);
         }
-        throw new CalcException("Var "+strVar+" not found"); // exception
+        throw new CalcException("Var " + strVar + " not found"); // exception
     }
 
     @Override

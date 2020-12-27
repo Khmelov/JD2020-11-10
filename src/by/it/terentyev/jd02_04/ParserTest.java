@@ -1,17 +1,18 @@
-package by.it.terentyev.calc;
+package by.it.terentyev.jd02_04;
 
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertArrayEquals;
+import static org.junit.Assert.assertEquals;
 
 public class ParserTest {
     private Parser parser;
 
     @Before
     public void setUp() throws Exception {
-        parser=new Parser();
+        parser = new Parser();
     }
 
     @Test
@@ -20,27 +21,26 @@ public class ParserTest {
         double actual = Double.parseDouble(actualScalar.toString());
         double expected = 19.0;
         assertEquals(expected, actual, 1e-5);
-
     }
 
     @Test
-    public void expressionScalars()  throws Exception {
+    public void expressionScalars() throws Exception {
         double actual = Double.parseDouble(parser.calc("A=2+5.3").toString());
-        assertEquals(7.3,actual, 1e-5);
+        assertEquals(7.3, actual, 1e-5);
 
         actual = Double.parseDouble(parser.calc("B=A*3.5").toString());
-        assertEquals(25.55,actual, 1e-5);
-
+        assertEquals(25.55, actual, 1e-5);
     }
+
     @Test
     public void expressionVectors() throws Exception {
-        Vector vector = (Vector)parser.calc("V={1,2,3}+{4,5,6}");
+        Vector vector = (Vector) parser.calc("V={1,2,3}+{4,5,6}");
         double[] actual = vector.getValue();
-        double[] expected = {5,7,9};
+        double[] expected = {5, 7, 9};
         assertArrayEquals(expected, actual, 1e-5);
     }
+
     @After
     public void tearDown() throws Exception {
-
     }
 }

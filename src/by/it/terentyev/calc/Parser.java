@@ -5,6 +5,7 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 public class Parser {
+
     private static final Map<String,Integer> priorytyMap = new HashMap<>(){
         {
             this.put("=",0);
@@ -15,8 +16,9 @@ public class Parser {
         }
     };
 
+
     public Var calc(String expression) throws CalcException {
-        //A=2+2*2-9
+
         expression = expression.replaceAll("\\s+", "");
         List<String> opperands = new ArrayList<>(Arrays.asList(expression.split(Patterns.OPERATION)));
         Matcher matcher = Pattern.compile(Patterns.OPERATION).matcher(expression);
@@ -30,7 +32,7 @@ public class Parser {
         String right = opperands.remove(index);
         String operation = operations.remove(index);
         Var result = calcOneOperation(left, operation, right);
-        opperands.add(index,result.toString());
+        opperands.add(index, result.toString());
         }
         return Var.createVar(opperands.get(0));
     }
@@ -49,8 +51,6 @@ public class Parser {
     }
 
     private Var calcOneOperation(String leftStr,String operation, String rightStr) throws CalcException {
-
-
         Var right = Var.createVar(rightStr);
         if (operation.equals("=")) {
             return Var.save(leftStr,right);
