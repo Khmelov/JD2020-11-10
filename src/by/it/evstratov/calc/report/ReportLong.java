@@ -7,7 +7,7 @@ public class ReportLong extends ReportBuilder{
     @Override
     public void writeError(CalcException e) {
         for (StackTraceElement stackTraceElement : e.getStackTrace()) {
-            report.writeReport(stackTraceElement + "\n");
+            report.write(stackTraceElement + "\n");
         }
     }
 }

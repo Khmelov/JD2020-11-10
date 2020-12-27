@@ -2,10 +2,7 @@ package by.it.evstratov.calc;
 
 import by.it.evstratov.calc.language.Lang;
 import by.it.evstratov.calc.language.Language;
-import by.it.evstratov.calc.report.CreateReport;
-import by.it.evstratov.calc.report.ReportBuilder;
-import by.it.evstratov.calc.report.ReportLong;
-import by.it.evstratov.calc.report.ReportShort;
+import by.it.evstratov.calc.report.*;
 
 import java.util.Locale;
 import java.util.Scanner;
@@ -17,11 +14,12 @@ public class ConsoleRunner {
 
     public static void main(String[] args) {
 
-        CreateReport report = new CreateReport();
-        ReportBuilder reportBuilder = new ReportLong();
-        report.setReportBuilder(reportBuilder);
-        report.constructorReport();
-        report.getReport().startReport();
+        CreatorReport creator = new CreatorReport();
+        ReportBuilder reportBuilder = new ReportShort();
+        creator.setReportBuilder(reportBuilder);
+        creator.constructorReport();
+        Report report = creator.getReport();
+        report.startReport();
         Locale.setDefault(Locale.ENGLISH);
         Printer printer = new Printer();
         Parser parser = new Parser();
@@ -31,7 +29,7 @@ public class ConsoleRunner {
         for (;;) {
             String expression = scanner.nextLine();
             if(expression.equals("end")){
-                report.getReport().endReport();
+                report.endReport();
                 break;
             }else if(expression.equals("printvar")){
                 Var.printVar();
@@ -44,9 +42,11 @@ public class ConsoleRunner {
             }else if(expression.equals(Lang.EN)){
                 lang.setLocale(new Locale("en","EN"));
             }else{
+                report.write(expression + "=");
                 try {
                     Var result = parser.calc(expression);
                     printer.print(result);
+                    report.write(result.toString() + "\n");
                 } catch (CalcException e) {
                     reportBuilder.writeError(e);
                     System.out.println(e.getMessage());

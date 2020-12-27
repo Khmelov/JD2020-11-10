@@ -1,6 +1,6 @@
 package by.it.evstratov.calc.report;
 
-public class CreateReport {
+public class CreatorReport {
 
     private ReportBuilder reportBuilder;
 
