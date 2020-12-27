@@ -3,7 +3,7 @@ package by.it.kglushchenko.jd02_05;
 import java.util.Locale;
 import java.util.ResourceBundle;
 
-public enum  Language {
+public enum Language {
     INSTANCE;
 
     private final String BASE = "by.it.kglushchenko.jd02_05.resources.language";
@@ -13,11 +13,15 @@ public enum  Language {
         setLocale(Locale.getDefault());
     }
 
-    final void setLocale(Locale  locale){
-        bundle=ResourceBundle.getBundle(BASE,locale);
+    final void setLocale(Locale locale) {
+        bundle = ResourceBundle.getBundle(BASE, locale);
     }
 
-    String get(String key){
+    public Locale getLocale() {
+        return bundle.getLocale();
+    }
+
+    String get(String key) {
         return bundle.getString(key);
     }
 }
