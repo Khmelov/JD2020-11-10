@@ -93,16 +93,35 @@ public class ParserTest {
         }
     }
 
-//    @Test
-//    public void subMatrix() throws CalcException {}
-//
-//
-//    @Test
-//    public void mulMatrix() throws CalcException {}
-//
-//
-//    @Test
-//    public void divMatrix() throws CalcException {}
+    @Test
+    public void subMatrix() throws CalcException {
+        final Matrix matrix = (Matrix) parser.calc("{{-1,2},{3,-4}}-{{5,-6},{7,-8}}");
+        final double[][] actual = matrix.getValue();
+        final double[][] expected = {{-6.0, 8.0}, {-4.0, 4.0}};
+        for (int i = 0; i < expected.length; i++) {
+            assertArrayEquals(actual[i], expected[i], 1e-5);
+        }
+    }
+
+    @Test
+    public void mulMatrix() throws CalcException {
+        final Matrix matrix = (Matrix) parser.calc("{{-1,2},{3,-4}}*{{5,-6},{7,-8}}");
+        final double[][] actual = matrix.getValue();
+        final double[][] expected = {{9.0, -10.0}, {-13.0, 14.0}};
+        for (int i = 0; i < expected.length; i++) {
+            assertArrayEquals(actual[i], expected[i], 1e-5);
+        }
+    }
+
+    @Test
+    public void divMatrix() throws CalcException {
+        final Matrix matrix = (Matrix) parser.calc("{{-1,2},{3,-4}}/5");
+        final double[][] actual = matrix.getValue();
+        final double[][] expected = {{-0.2, 0.4}, {0.6, -0.8}};
+        for (int i = 0; i < expected.length; i++) {
+            assertArrayEquals(actual[i], expected[i], 1e-5);
+        }
+    }
 
     @Test
     public void expressionScalar() throws CalcException {
@@ -122,9 +141,18 @@ public class ParserTest {
         final double expected4 = 2.65;
         assertEquals(expected4, actual4, 1e-5);
 
-//        final double actual5 = Double.parseDouble(parser.calc("C=B+(A*2)").toString());
-//        final double expected5 = 40.15;
-//        assertEquals(expected5, actual5, 1e-5);
+        final double actual5 = Double.parseDouble(parser.calc("C=B+(A*2)").toString());
+        final double expected5 = 40.15;
+        assertEquals(expected5, actual5, 1e-5);
+
+        final double actual6 = Double.parseDouble(parser.calc("D=((C-0.15)-20)/(7-5)").toString());
+        final double expected6 = 10.00;
+        assertEquals(expected6, actual6, 1e-5);
+
+        final Vector vector = (Vector) parser.calc("E={2,3}*(D/2)");
+        final double[] actual7 = vector.getValue();
+        final double[] expected7 = {10, 15};
+        assertArrayEquals(actual7, expected7, 1e-5);
     }
 
     @Test
