@@ -1,4 +1,4 @@
-package by.it.terentyev.calc;
+package by.it.terentyev.jd02_04;
 
 import java.util.Arrays;
 import java.util.StringJoiner;
@@ -26,10 +26,10 @@ class Vector extends Var {
         for (int i = 0; i < res.length; i++) {
             res[i] = Double.parseDouble(strArr[i]);
         }
-            }
+    }
 
     @Override
-    public Var add(Var other)  throws CalcException {
+    public Var add(Var other) throws CalcException {
         if (other instanceof Scalar) {
             double otherValue = ((Scalar) other).getValue();
             double[] arr = Arrays.copyOf(value, value.length);
@@ -46,7 +46,6 @@ class Vector extends Var {
         }
         return super.add(other);
     }
-
 
     @Override
     public String toString() {

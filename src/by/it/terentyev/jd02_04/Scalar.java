@@ -1,4 +1,4 @@
-package by.it.terentyev.calc;
+package by.it.terentyev.jd02_04;
 
 class Scalar extends Var {
 
@@ -26,30 +26,27 @@ class Scalar extends Var {
             double otherValue = ((Scalar) other).value;
             double result = this.value + otherValue;
             return new Scalar(result);
-        }
-        else
+        } else
             return other.add(this);
     }
 
     @Override
-    public Var sub(Var other)  throws CalcException {
+    public Var sub(Var other) throws CalcException {
         if (other instanceof Scalar) {
             double otherValue = ((Scalar) other).value;
             double result = this.value - otherValue;
             return new Scalar(result);
-        }
-        else
+        } else
             return other.sub(this).mul(new Scalar(-1));
     }
 
     @Override
-    public Var mul(Var other)  throws CalcException {
+    public Var mul(Var other) throws CalcException {
         if (other instanceof Scalar) {
             double otherValue = ((Scalar) other).value;
             double result = this.value * otherValue;
             return new Scalar(result);
-        }
-        else
+        } else
             return other.mul(this);
     }
 
@@ -57,19 +54,14 @@ class Scalar extends Var {
     public Var div(Var other) throws CalcException {
         if (other instanceof Scalar) {
             double otherValue = ((Scalar) other).value;
-            if (otherValue==0){
+            if (otherValue == 0) {
                 throw new CalcException("Division by zero");
             }
             double result = this.value / otherValue;
             return new Scalar(result);
-        }
-        else
+        } else
             return super.div(other);
     }
-
-
-
-
 
     @Override
     public String toString() {

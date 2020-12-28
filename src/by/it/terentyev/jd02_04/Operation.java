@@ -1,4 +1,4 @@
-package by.it.terentyev.calc;
+package by.it.terentyev.jd02_04;
 
 interface Operation {
     Var add(Var other) throws CalcException;
