@@ -4,7 +4,6 @@ import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.util.Map;
 
 enum Logger {
     INSTANCE;
@@ -21,6 +20,8 @@ enum Logger {
         String src = System.getProperty("user.dir") + File.separator + "src" + File.separator;
         String path = Logger.class.getPackageName()
                 .replace(".", File.separator)
+                .concat(File.separator)
+                .concat("reports")
                 .concat(File.separator);
         return src + path + fileName;
     }
