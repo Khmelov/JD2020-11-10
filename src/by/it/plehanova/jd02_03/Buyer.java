@@ -1,13 +1,18 @@
-package by.it.plehanova.jd02_02;
+package by.it.plehanova.jd02_03;
+
+import java.util.concurrent.Semaphore;
 
 class Buyer extends Thread implements IBuyer, IUseBasket {
-    private final Basket basket = new Basket();
+    private Basket basket;
+    private final Dispatcher dispatcher;
+    private static final Semaphore semaphore = new Semaphore(20);
     private boolean isPensioner;
     private boolean isRunnable;
 
-    public Buyer(int number) {
+    public Buyer(int number, Dispatcher dispatcher) {
         super("Buyer №" + number);
-        Dispatcher.addBuyer();
+        this.dispatcher = dispatcher;
+        dispatcher.addBuyer();
     }
 
     public void setRunnable(boolean runnable) {
@@ -47,29 +52,32 @@ class Buyer extends Thread implements IBuyer, IUseBasket {
     @Override
     public void chooseGoods() {
         System.out.println(this + " Started choose goods");
-        for (int i = 0; i < Helper.getRandom(1, 4); i++) {
-            putGoodsToBasket();
-            int timeout = Helper.getRandom(500, 2000);
-            if (this.isPensioner()) {
-                timeout = (int) (timeout * 1.5);
+        try {
+            semaphore.acquire();
+            for (int i = 0; i < Helper.getRandom(1, 4); i++) {
+                putGoodsToBasket();
+                int timeout = Helper.getRandom(500, 2000);
+                if (this.isPensioner()) {
+                    timeout = (int) (timeout * 1.5);
+                }
+                Helper.sleep(timeout);
             }
-            Helper.sleep(timeout);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        } finally {
+            System.out.println(this + " finished choose goods");
+            semaphore.release();
         }
-        System.out.println(this + " finished choose goods");
+
     }
 
     @Override
     public void goToQueue() {
 
-        QueueBuyers.add(this);
-        System.out.println(this + " add to queue");
-
-        synchronized (Dispatcher.monitorForOpen) {
-            Dispatcher.needToOpenCashier();
-        }
-
-        this.setRunnable(false);
         synchronized (this) {
+            dispatcher.getQueueBuyers().add(this);
+            System.out.println(this + " add to queue");
+
             while (!this.isRunnable) {
                 try {
                     this.wait();
@@ -77,19 +85,35 @@ class Buyer extends Thread implements IBuyer, IUseBasket {
                     e.printStackTrace();
                 }
             }
+
+            this.setRunnable(false);
+            System.out.println(this + " left the queue");
         }
-        System.out.println(this + " left the queue");
     }
 
     @Override
     public void goOut() {
+        try {
+            basket.getGoodsInBasket().clear();
+            Basket.getBasket().putLast(basket);
+            System.out.println("------Осталось " + Basket.getBasket().size() + " корзин");
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
         System.out.println(this + " leaves the Market");
-        Dispatcher.goOutBuyers();
+        dispatcher.goOutBuyers();
     }
 
     @Override
     public void takeBasket() {
-        System.out.println(this + " take a basket");
+
+        try {
+            basket = Basket.getBasket().take();
+            System.out.println("------Осталось " + Basket.getBasket().size() + " корзин");
+            System.out.println(this + " take a basket");
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
 
     }
 

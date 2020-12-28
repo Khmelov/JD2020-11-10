@@ -8,6 +8,10 @@ abstract class Var implements Operation {
 
     private static final Map<String, Var> variables = new HashMap<>();
 
+    public static Map<String, Var> getVariables() {
+        return variables;
+    }
+
     public static Var save(String varName, Var varValue) {
         variables.put(varName, varValue);
         RepoVar.saveVariables(variables);
@@ -27,19 +31,6 @@ abstract class Var implements Operation {
         }
     }
 
-    public static Var createVar(String operand) throws CalcException {
-        operand = operand.trim().replaceAll("\\s+", "");
-        if (operand.matches(Patterns.SCALAR)) {
-            return new Scalar(operand);
-        } else if (operand.matches(Patterns.VECTOR)) {
-            return new Vector(operand);
-        } else if (operand.matches(Patterns.MATRIX)) {
-            return new Matrix(operand);
-        } else if (variables.containsKey(operand)) {
-            return variables.get(operand);
-        }
-        throw new CalcException(ConsoleRunner.lang.get(Error.VAR) + " " + operand + " " + ConsoleRunner.lang.get(Error.NOT_FOUND));
-    }
 
     @Override
     public Var add(Var other) throws CalcException {
