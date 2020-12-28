@@ -1,4 +1,4 @@
-package by.it.leshchenko.jd02_05.txt;
+package by.it.leshchenko.jd02_05;
 
 public interface Messages {
     String WELCOME = "message.welcome";
