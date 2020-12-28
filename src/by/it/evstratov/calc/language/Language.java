@@ -22,7 +22,7 @@ public enum Language {
         return bundle.getString(key);
     }
 
-    Locale getLocale(){
+    public Locale getLocale(){
         return bundle.getLocale();
     }
 }

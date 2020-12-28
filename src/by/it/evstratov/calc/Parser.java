@@ -8,6 +8,8 @@ import java.util.regex.Pattern;
 
 public class Parser {
 
+    VarCreator var = new VarCreator();
+
     static boolean checkBrackets(String expression){
 
         ArrayDeque<Character> arrayDeque = new ArrayDeque<>();
@@ -82,7 +84,7 @@ public class Parser {
             operands.add(index, result.toString());
         }
 
-        return Var.createVar(operands.get(0));
+        return var.createVar(operands.get(0));
     }
 
     private int getIndex(List<String> operations) {
@@ -99,21 +101,20 @@ public class Parser {
     }
 
     public Var calcOneOperation(String leftStr, String operation, String rightStr) throws CalcException {
-        Var right = Var.createVar(rightStr);
+        Var right = var.createVar(rightStr);
         if(operation.equals("=")){
             return Var.saveVar(leftStr, right);
         }
-        Var left = Var.createVar(leftStr);
-
+        Var left = var.createVar(leftStr);
         switch (operation){
             case "+" :
-                RepoVar.saveToLog(right + " + " + left +" = "+right.addWidth(left));
+                ConsoleRunner.logger.log(right + " + " + left +" = "+right.addWidth(left));
                 return right.addWidth(left);
-            case "-" : RepoVar.saveToLog(right + " - " + left+" = "+right.subWidth(left));
+            case "-" : ConsoleRunner.logger.log(right + " - " + left+" = "+right.subWidth(left));
                 return right.subWidth(left);
-            case "*" : RepoVar.saveToLog(right + " * " + left+" = "+right.mulWidth(left));
+            case "*" : ConsoleRunner.logger.log(right + " * " + left+" = "+right.mulWidth(left));
                 return right.mulWidth(left);
-            case "/" : RepoVar.saveToLog(right + " / " + left+" = "+right.divWidth(left));
+            case "/" : ConsoleRunner.logger.log(right + " / " + left+" = "+right.divWidth(left));
                 return right.divWidth(left);
         }
         throw new CalcException(ConsoleRunner.lang.get(ErrorLang.ERROR));
