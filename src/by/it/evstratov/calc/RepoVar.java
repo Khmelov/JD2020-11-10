@@ -52,17 +52,6 @@ public class RepoVar {
         }
     }
 
-    static void saveToLog(String message) {
-
-        try(OutputStreamWriter outputStream = new OutputStreamWriter(new FileOutputStream(getFilename()+FILE_LOG,true))){
-            outputStream.write(message+"\n");
-            clearFile();
-        }catch (IOException e) {
-            e.printStackTrace();
-        }
-
-    }
-
     static void clearFile(){
         try(BufferedReader bufferedReader = new BufferedReader(new FileReader(getFilename()+FILE_LOG))
         ){

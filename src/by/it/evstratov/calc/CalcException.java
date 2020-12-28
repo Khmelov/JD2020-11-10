@@ -1,29 +1,32 @@
 package by.it.evstratov.calc;
 
+import by.it.evstratov.calc.language.ErrorLang;
+
+
 public class CalcException extends Exception{
 
     public CalcException() {
         super();
-        RepoVar.saveToLog(this.getMessage());
+        ConsoleRunner.logger.log(this.getMessage());
     }
 
     public CalcException(String message) {
-        super("ERROR: "+message);
-        RepoVar.saveToLog(this.getMessage());
+        super(ConsoleRunner.lang.get(ErrorLang.ERROR)+": "+message);
+        ConsoleRunner.logger.log(this.getMessage());
     }
 
     public CalcException(String message, Throwable cause) {
-        super("ERROR: "+message, cause);
-        RepoVar.saveToLog(this.getMessage());
+        super(ConsoleRunner.lang.get(ErrorLang.ERROR)+": "+message, cause);
+        ConsoleRunner.logger.log(this.getMessage());
     }
 
     public CalcException(Throwable cause) {
         super(cause);
-        RepoVar.saveToLog(this.getMessage());
+        ConsoleRunner.logger.log(this.getMessage());
     }
 
     public CalcException(String message, Throwable cause, boolean enableSuppression, boolean writableStackTrace) {
-        super("ERROR: "+ message, cause, enableSuppression, writableStackTrace);
-        RepoVar.saveToLog(this.getMessage());
+        super(ConsoleRunner.lang.get(ErrorLang.ERROR)+": "+ message, cause, enableSuppression, writableStackTrace);
+        ConsoleRunner.logger.log(this.getMessage());
     }
 }

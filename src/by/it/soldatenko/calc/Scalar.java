@@ -1,5 +1,7 @@
 package by.it.soldatenko.calc;
 
+import java.util.Calendar;
+
 class Scalar extends Var {
     private double value;
 
@@ -61,7 +63,8 @@ class Scalar extends Var {
         if(other instanceof Scalar){
             double otherValue = ((Scalar) other).value;
             if (otherValue==0){
-                throw new CalcException("Division by zero");
+                Logger.INCTANCE.log(Language.get(Messages.DIVITION_BY_ZERO)+ " "+Calendar.getInstance().getTime());
+                throw new CalcException(Language.get(Messages.DIVITION_BY_ZERO));
 
             }
             double result = this.value/otherValue;

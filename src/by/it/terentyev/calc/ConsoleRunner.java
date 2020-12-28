@@ -3,17 +3,25 @@ package by.it.terentyev.calc;
 import java.util.Scanner;
 
 public class ConsoleRunner {
-    public static void main(String[] args) {
+
+    public static void main(String[]   args) {
         Printer printer = new Printer();
         Parser parser = new Parser();
         Scanner scanner = new Scanner(System.in);
-        for (;;){
-            String expression = scanner.nextLine();
-            if (expression.equals("end")) {
+        RepoVar.loadVariables();
+        for(;;){
+            String expression=scanner.nextLine();
+            if (expression.equals("end")){
                 break;
+
             }
-            Var result = parser.calc(expression);
-            printer.print(result);
+            try {
+                Var result = parser.calc(expression);
+                printer.print(result);
+            } catch (CalcException e) {
+
+                    printer.printErr(e);
+            }
         }
     }
 }
