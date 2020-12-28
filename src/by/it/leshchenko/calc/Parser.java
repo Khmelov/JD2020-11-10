@@ -40,7 +40,7 @@ public class Parser {
             final Var result = calcOneOperation(left, operation, right);
             operands.add(index, result.toString());
         }
-        return Var.createVar(operands.get(0));
+        return VarCreator.create(operands.get(0));
     }
 
         private int getIndex(List<String> operations) {
@@ -57,11 +57,11 @@ public class Parser {
     }
 
     private Var calcOneOperation(String leftStr, String operation, String rightStr) throws CalcException {
-        Var right = Var.createVar(rightStr);
+        Var right = VarCreator.create(rightStr);
         if (operation.contains("=")) {
             return Var.save(leftStr, right);
         }
-        Var left = Var.createVar(leftStr);
+        Var left = VarCreator.create(leftStr);
         switch (operation) {
             case "+":
                 return left.add(right);

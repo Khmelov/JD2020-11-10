@@ -3,6 +3,9 @@ package by.it.leshchenko.calc;
 import java.util.Scanner;
 
 public class ConsoleRunner {
+
+    static Logger logger = Logger.INSTANCE;
+
     public static void main(String[] args) {
         Printer printer = new Printer();
         Parser parser = new Parser();
