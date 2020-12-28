@@ -8,22 +8,7 @@ import java.io.PrintWriter;
 
 enum Logger {
     INCTANCE;
-//    private  static volatile Logger logger;
-//    private final String logname="log.txt";
-//    private Logger(){
 
-//    }
-//    static  Logger getLogger(){
-//        Logger local = logger;
-//        if (logger==null){
-//            synchronized (Logger.class){
-//                local=logger;
-//                if (local==null){
-//                    local= logger= new Logger();
-//                }
-//            }
-//        return  local;
-//    }
     void log(String message){
         try
             (PrintWriter printWriter = new PrintWriter(new FileWriter(dir(), true)))
