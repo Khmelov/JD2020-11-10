@@ -25,14 +25,13 @@ public class Cashier implements Runnable {
                 System.out.println(this + "Started service for" + buyer);
                 int t = Helper.getRandom(2000, 5000);
                 Helper.sleep(t);
-                printReceipt(buyer);
-                System.out.println(this + "Finished service for" + buyer);
-
                 //noinspection SynchronizationOnLocalVariableOrMethodParameter
                 synchronized (buyer) {
                     buyer.setRunnable(true);
                     buyer.notify();
                 }
+                printReceipt(buyer);
+                System.out.println(this + "Finished service for" + buyer);
                 if (Dispatcher.isNeedClose()) {
                     ListCashiers.add(this);
                     Dispatcher.closeCashier();
