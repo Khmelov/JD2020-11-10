@@ -5,13 +5,15 @@ import java.util.ResourceBundle;
 
 public enum Language {
 
+
     ISTANCE;
+    private final String BASE = "by.it.soldatenko.jd02_05.resources.language";
     ResourceBundle bundle;
-
-   final void setLocale(Locale locale){
-
-       String BASE= Language.class.getName().replace(Language.class.getSimpleName(), "")+"resources.language";
-       bundle=ResourceBundle.getBundle(BASE, locale);
+    Language(){
+        setLocale(Locale.getDefault());
+    }
+    final void setLocale(Locale locale){
+        bundle=ResourceBundle.getBundle(BASE, locale);
     }
     String get(String key){
         return bundle.getString(key);

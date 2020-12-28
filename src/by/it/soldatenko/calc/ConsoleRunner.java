@@ -11,6 +11,7 @@ public class ConsoleRunner {
         String line;
         Parser parser = new Parser();
         Printer printer = new Printer();
+        RepoVar.loadVariables();
         Language.setLocale(Locale.getDefault());
 
 
