@@ -1,20 +1,30 @@
 package by.it.plehanova.calc;
 
-import by.it.plehanova.jd02_05.Messages;
-import by.it.plehanova.jd02_05.User;
+import by.it.plehanova.calc.builder.*;
 
 import java.util.Locale;
 import java.util.Scanner;
 
 public class ConsoleRunner {
+
     public static Lang lang = Lang.INSTANCE;
 
     public static void main(String[] args) {
-        Locale.setDefault(Locale.ENGLISH);
-
         if (args.length == 2) {
             lang.setLocale(new Locale(args[0], args[1]));
         }
+
+        ReportManager builder = new ReportManager();
+        ReportBuilder reportShort = new ReportShort();
+        builder.setBuilder(reportShort);
+        builder.constructReport();
+        LogReport shortReport = builder.getReport();
+
+        //code for LongReport
+/*        ReportBuilder reportLong = new ReportLong();
+        builder.setBuilder(reportLong);
+        builder.constructReport();
+        LogReport fullReport = builder.getReport();*/
 
         Scanner scanner = new Scanner(System.in);
         Parser pars = new Parser();
@@ -46,10 +56,14 @@ public class ConsoleRunner {
                     printer.print(result);
 
                 } catch (CalcException e) {
-                    //e.printStackTrace();
+                    reportShort.buildLog(e);
+                    //reportLong.buildLog(e);
                     printer.printErr(e);
                 }
             }
         }
+        //fullReport.print();
+        shortReport.print();
+
     }
 }

@@ -3,10 +3,10 @@ package by.it.plehanova.jd02_02;
 import java.util.LinkedList;
 
 public class QueueBuyers {
-    private static final LinkedList<Buyer> queue = new LinkedList<>();
     private static int position = 0;
+    private static final LinkedList<Buyer> queue = new LinkedList<>();
 
-    public static LinkedList<Buyer> getQueue() {
+    public synchronized static LinkedList<Buyer> getQueue() {
         return queue;
     }
 

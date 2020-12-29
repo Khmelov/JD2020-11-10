@@ -18,7 +18,14 @@ public class Parser {
 
     public Var calc(String expression) throws CalcException {
         expression = expression.trim().replaceAll("\\s+", "");
-
+        while (expression.contains("(")) {
+            Matcher expressionInBrackets = Pattern.compile(Patterns.BRACKETS).matcher(expression);
+            while (expressionInBrackets.find()) {
+                final String group = expressionInBrackets.group();
+                final Var res = calc(group.replace("(", "").replace(")", ""));
+                expression = expression.replace(group, res.toString());
+            }
+        }
         final List<String> operands = new ArrayList<>(Arrays.asList(expression.split(Patterns.OPERATION)));
         final Matcher matcher = Pattern.compile(Patterns.OPERATION).matcher(expression);
         List<String> operations = new ArrayList<>();
@@ -33,7 +40,7 @@ public class Parser {
             final Var result = calcOneOperation(left, operation, right);
             operands.add(index, result.toString());
         }
-        return Var.createVar(operands.get(0));
+        return VarCreator.create(operands.get(0));
     }
 
         private int getIndex(List<String> operations) {
@@ -50,11 +57,11 @@ public class Parser {
     }
 
     private Var calcOneOperation(String leftStr, String operation, String rightStr) throws CalcException {
-        Var right = Var.createVar(rightStr);
+        Var right = VarCreator.create(rightStr);
         if (operation.contains("=")) {
             return Var.save(leftStr, right);
         }
-        Var left = Var.createVar(leftStr);
+        Var left = VarCreator.create(leftStr);
         switch (operation) {
             case "+":
                 return left.add(right);

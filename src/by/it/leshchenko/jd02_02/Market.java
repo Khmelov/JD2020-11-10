@@ -16,7 +16,8 @@ public class Market {
         }
         int number = 0;
         while (isOpened()) {
-            for (int i = 0; i < Helper.random(2 + 1); i++) {
+            int count = Helper.random(2 + 1);
+            for (int i = 0; i < count && isOpened(); i++) {
                 final Buyer buyer = new Buyer(++number);
                 buyer.start();
                 buyersAndCashiers.add(buyer);

@@ -4,7 +4,7 @@ import java.util.ArrayList;
 
 class Basket {
 
-    private ArrayList<Good> goodsInBasket = new ArrayList<>();
+    private final ArrayList<Good> goodsInBasket = new ArrayList<>();
 
     public ArrayList<Good> getGoodsInBasket() {
         return goodsInBasket;

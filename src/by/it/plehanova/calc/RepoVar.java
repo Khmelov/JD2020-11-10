@@ -8,7 +8,7 @@ import java.util.Map;
 
 public class RepoVar {
     private static final String VARS_TXT = "vars.txt";
-    private static final String LOG_TXT = "log.txt";
+    private static final String LOG_TXT = "log2.txt";
 
     private RepoVar() {
 
@@ -16,7 +16,11 @@ public class RepoVar {
 
     private static String getFileName() {
         String src = System.getProperty("user.dir") + File.separator + "src" + File.separator;
-        String path = RepoVar.class.getPackageName().replace(".", File.separator).concat(File.separator);
+        String path = RepoVar.class.getPackageName()
+                .replace(".", File.separator)
+                .concat(File.separator)
+                .concat("reports")
+                .concat(File.separator);;
         return src + path;
     }
 

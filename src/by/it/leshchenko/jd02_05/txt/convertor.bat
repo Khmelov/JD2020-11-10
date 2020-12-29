@@ -1,0 +1,3 @@
+/Users/ileshchenko/Library/Java/JavaVirtualMachines/adopt-openj9-1.8.0_275/Contents/Home/bin/native2ascii -encoding UTF-8 language.txt ../resources/language.properties
+/Users/ileshchenko/Library/Java/JavaVirtualMachines/adopt-openj9-1.8.0_275/Contents/Home/bin/native2ascii -encoding UTF-8 language_ru_RU.txt ../resources/language_ru_RU.properties
+/Users/ileshchenko/Library/Java/JavaVirtualMachines/adopt-openj9-1.8.0_275/Contents/Home/bin/native2ascii -encoding UTF-8 language_be_BY.txt ../resources/language_be_BY.properties

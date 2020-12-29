@@ -4,13 +4,11 @@ import java.util.ArrayList;
 
 public class Cashier implements Runnable {
     private final int number;
-    private static int count = 5;
     private static double TOTAL_SUM = 0;
 
 
     public Cashier(int number) {
         this.number = number;
-        Dispatcher.addCashier();
     }
 
     public int getNumber() {
@@ -20,35 +18,38 @@ public class Cashier implements Runnable {
     @Override
     public void run() {
         System.out.println(this + "opened");
+        System.out.printf("%s%s = %d\n", "-------------------------------", "ОТКРЫТЫХ КАСС", Dispatcher.getOpenCashiers());
         while (!Dispatcher.markedIsClosed()) {
             Buyer buyer = QueueBuyers.extract();
             if (buyer != null) {
-                synchronized (System.in) {
-                    System.out.println(this + "Started service for" + buyer);
-                    int t = Helper.getRandom(2000, 5000);
-                    Helper.sleep(t);
-                    printReceipt(buyer);
-                    System.out.println(this + "finished service for" + buyer);
-                }
+                System.out.println(this + "Started service for" + buyer);
+                int t = Helper.getRandom(2000, 5000);
+                Helper.sleep(t);
                 //noinspection SynchronizationOnLocalVariableOrMethodParameter
                 synchronized (buyer) {
                     buyer.setRunnable(true);
                     buyer.notify();
                 }
+                printReceipt(buyer);
+                System.out.println(this + "Finished service for" + buyer);
+                if (Dispatcher.isNeedClose()) {
+                    ListCashiers.add(this);
+                    Dispatcher.closeCashier();
+                    break;
+                }
 
             } else {
-                synchronized (Dispatcher.cashierMonitor) {
-                    if (Dispatcher.getOpenCashier() == 1) {
-                        try {
-                            Dispatcher.closeCashier();
-                            Dispatcher.cashierMonitor.wait();
-                        } catch (InterruptedException e) {
-                            e.printStackTrace();
-                        }
-                    }
+                if (Dispatcher.getOpenCashiers() == 1) {
+                    Thread.yield();
+                } else {
+                    ListCashiers.add(this);
+                    Dispatcher.closeCashier();
+                    break;
                 }
             }
         }
+        System.out.println(this + "closed");
+        System.out.printf("%s%s = %d\n", "-------------------------------", "ОТКРЫТЫХ КАСС", Dispatcher.getOpenCashiers());
     }
 
     public synchronized void printReceipt(Buyer buyer) {
@@ -59,14 +60,11 @@ public class Cashier implements Runnable {
             double totalSum = 0;
 
             int countSpace = 25;
-            int countTotal = 100;
+            int countTotal = 105;
             StringBuffer space = new StringBuffer();
             StringBuffer spaceForTotalSum = new StringBuffer();
-            space.append(" ".repeat(Math.max(0, countSpace * this.number - 25)));
-            for (int i = 0; i < countTotal - space.length() - 25; i++) {
-                spaceForTotalSum.append(" ");
-            }
-
+            space.append(" ".repeat(countSpace * this.number - 25));
+            spaceForTotalSum.append(".".repeat(countTotal - space.length()));
 
             System.out.printf("%s%9s%10s%5s\n", space, "-----", this, "-----");
             System.out.printf("%s%25s\n", space, "Receipt of " + buyer);
@@ -80,8 +78,8 @@ public class Cashier implements Runnable {
             TOTAL_SUM += totalSum;
             int queue = QueueBuyers.getQueue().size();
             System.out.printf("%s%25s\n", space, "---------------------");
-            System.out.printf("%s%15s | %-3.2f\n", space, "total sum", totalSum);
-            System.out.printf("%s%25s%s%7.2f$   %d - queue\n", space, "---------------------", spaceForTotalSum, TOTAL_SUM, queue);
+            System.out.printf("%s%15s | %-7.2f%s%7.2f$   %d - queue\n", space, "total sum", totalSum, spaceForTotalSum, TOTAL_SUM, queue);
+            System.out.printf("%s%25s\n", space, "---------------------");
         }
     }
 
