@@ -7,10 +7,10 @@ import java.util.Arrays;
 
 class Vector extends Var {
 
-
-    private double[] array;
-
-
+    private final double[] array;
+    public double[] getArray() {
+        return array;
+    }
 
     Vector(double[] value) {
         this.array = Arrays.copyOf(value, value.length);
