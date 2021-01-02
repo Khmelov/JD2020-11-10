@@ -11,7 +11,7 @@ abstract class Var implements Operation {
     }
 
     public static Var createVar(String strVar) {
-
+        strVar = strVar.replaceAll("\\s+", "");
         if(strVar.matches(Patterns.SCALAR)){
             return new Scalar(strVar);
         }
@@ -28,8 +28,6 @@ abstract class Var implements Operation {
         return  null;//ret exception
 
     }
-
-
 
 
     @Override

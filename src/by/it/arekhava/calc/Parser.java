@@ -37,7 +37,17 @@ public class Parser {
         }
         return Var.createVar(operands.get(0));
     }
-
+//  while (operations.size() > 0) {
+//            int index = getIndex(operations);
+//            String left = operands.remove(index);
+//            String right = operands.remove(index);
+//            String operation = operations.remove(index);
+//            Var result = calcOneOperation(left, operation, right);
+//            //вот тут если вектор с пробелами (а он с пробелами) то createVar не сработает
+//            //исправил в Var.createVar
+//            operands.add(index, result.toString());
+//        }
+//        return Var.createVar(operands.get(0));
     private int getIndex(List<String> operations) {
         int index=-1;
         int prior=-1;
