@@ -1,4 +1,4 @@
-package by.it.arekhava.calc;
+package by.it.arekhava.jd02_04;
 
 import java.util.Scanner;
 
