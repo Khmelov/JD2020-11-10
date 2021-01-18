@@ -1,7 +1,4 @@
-package by.it.arekhava.calc;
-
-import by.it.arekhava.calc.Patterns;
-import by.it.arekhava.calc.Var;
+package by.it.arekhava.jd02_04;
 
 import java.util.*;
 import java.util.regex.Matcher;
