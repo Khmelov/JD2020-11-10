@@ -1,13 +1,20 @@
 package by.it.bogunov.jd01_03;
 
-
+import java.util.Scanner;
 
 public class Runner {
     public static void main(String[] args) {
-        String line="100 2 4 6 90 23 44 51";
-        double[] array=InOut.getArray(line);
+        Scanner scanner = new Scanner(System.in);
+        System.out.print("Ввод: ");
+        String str= scanner.nextLine();
+        double[] array =InOut.getArray(str);
         InOut.printArray(array);
-        InOut.printArray(array,"A",2);
-
+        InOut.printArray(array, "V", 3);
+        System.out.print("Введите одномерный массив: ");
+        String strr = scanner.nextLine();
+        double[] mas = InOut.getArray(strr);
+        Helper.findMin(mas);
+        Helper.findMax(mas);
+        Helper.sort(mas);
     }
 }

@@ -1,4 +1,7 @@
 package by.it.bogunov.jd01_01;
+
+import java.util.Scanner;
+
 /*
 Ускорение свободного падения на Земле и Марсе таково:
 Марс   3.86
@@ -30,6 +33,22 @@ package by.it.bogunov.jd01_01;
 29.51
 
 */
-class TaskC3 {
 
+
+class TaskC3 {
+    public static void main(String[] args) {
+        Scanner scanner =new Scanner(System.in);
+        System.out.print("Введите вес: ");
+        int weight=scanner.nextInt();;
+        getWeight(weight);
+        System.out.println(getWeight(weight));
+
+    }
+
+    public static double getWeight(int weight){     // не понимаю, зачем нужен интовый параметр метода
+        double h = weight/9.81*3.86;
+        h = Math.round(h*100)/100.0d;
+        return h;
+    }
 }
+

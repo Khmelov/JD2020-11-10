@@ -4,52 +4,61 @@ import java.util.Scanner;
 
 public class TaskA {
     public static void main(String[] args) {
-        Scanner scanner = new Scanner(System.in);
-        int[] arr=new int[10];
-        for (int i = 0; i < arr.length; i++) {
-            arr[i] = scanner.nextInt();
-        }        
-        step1(arr);
-        step2(arr);
-        step3(arr);
+        Scanner scanner =new Scanner(System.in);
+        System.out.print("Введите 10 чисел: ");
+        int[] mas = new int[10];
+        for (int i = 0; i < mas.length; i++) {
+            mas [i]=scanner.nextInt();
+        }
+        step1(mas);
+        step2(mas);
+        step3(mas);
 
     }
 
-    private static void step1(int[] arr) {
-        int min=arr[0];
-        int max=arr[0];
-        for (int value : arr) {
-            if (value>max){
-                max=value;
-            }
-            min = Math.min(min, value);
+
+
+
+    private static void step1(int[] mas) {
+        int min = mas[0];
+        int max = mas[0];
+        for (int i = 0; i< mas.length; i++) {
+            if (mas[i]>max) max = mas[i];
+            if (mas[i]<min) min = mas[i];
         }
-        System.out.println(min+" "+max);
+        System.out.println(min + " " + max);
     }
 
-    private static void step2(int[] arr) {
-        int sum=0;
-        for (int value : arr) {
-            sum+=value;
+    private static void step2(int[] mas) {
+        double sum =0;
+        for(int i=0; i<mas.length; i++) {
+            sum=sum+mas[i];
         }
-        double avg=(double) sum/ arr.length;
-        for (int value : arr) {
-            if (value<avg){
-            System.out.print(value+" ");}
+        double sred = sum/mas.length;
+        for(int i=0; i<mas.length; i++) {
+            if (mas[i]<sred) System.out.println(mas[i]);
         }
-        System.out.println();
+
     }
 
-    private static void step3(int[] arr) {
-        int min=arr[0];
-        for (int value : arr) {
-            min = Math.min(min, value);
+
+    private static void step3(int[] mas) {
+        int min = mas[0];
+        for (int i = 0; i< mas.length; i++) {
+            if (mas[i]<min) min = mas[i];
         }
-        for (int i = arr.length - 1; i >= 0; i--) {
-            if (arr[i]==min) {
-                System.out.print(i+" ");
-            }
+        for (int i = mas.length-1; i>=0 ; i--) {
+            if(mas[i]==min) System.out.print(i + " ");
+            
         }
-        System.out.println();
+
+
+        
+
+
+
     }
+
+
+
 }
