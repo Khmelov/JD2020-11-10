@@ -1,7 +1,0 @@
-message.error=Ошибка
-message.divbyzero=Деление на 0
-message.operation=Операция
-message.notfound=не найдена
-message.diflength=Разная длина
-message.abstrclass=Это абстрактный класс
-message.var=Переменная

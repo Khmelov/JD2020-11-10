@@ -1,4 +1,0 @@
-messages.welcome=Сардэчна запрашаем!
-messages.question=Як справы?
-user.firstname=Іван
-user.lastname=Салдаценка
