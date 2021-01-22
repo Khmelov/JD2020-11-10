@@ -246,11 +246,25 @@ public class HomeWork {
                 if (pos == bytes.length) { //символ готов
                     String s = new String(bytes); //соберем весь символ
                     strOut.append(s); //запомним вывод для теста
-                    //oldOut.append(s); //копию в обычный вывод
+                    oldOut.append(s); //копию в обычный вывод
                     pos = 0; //готовим новый символ
                 }
 
             }
         });
     }
+
+//    private static boolean hideSystemOut = hideSystemOut();
+//
+//    private static boolean hideSystemOut() {
+//        try {
+//            Properties properties = new Properties();
+//            properties.load(new FileInputStream("application.properties"));
+//            String value = properties.getProperty("homework.hideSystemOut").trim();
+//            return value.equalsIgnoreCase("true") ||
+//                    value.equalsIgnoreCase("1");
+//        } catch (IOException e) {
+//            return false;
+//        }
+//    }
 }
