@@ -1,9 +1,0 @@
-message.hello=Добры дзень
-message.question=Як вашы справы?
-user.firstname=Анастасія
-user.lastname=Пляханава
-
-
-
-
-
