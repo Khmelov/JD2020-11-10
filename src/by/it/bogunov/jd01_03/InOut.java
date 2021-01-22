@@ -1,35 +1,44 @@
 package by.it.bogunov.jd01_03;
 
-class InOut {
-    public static double[] getArray(String line) {
-        //"100 2 4 6 90 23 44 51"
-        String[] strArray = line.trim().split(" ");
-        double[] result=new double[strArray.length];
+public class InOut {
+    static double[ ] getArray(String line){
+       String[] strArray = line.split(" ");
+       double[] res=new double[strArray.length]; //массив на возврат
         for (int i = 0; i < strArray.length; i++) {
-            result[i]=Double.parseDouble(strArray[i]);
-
+            res[i]= Double.parseDouble(strArray[i]); //Переводит из строк в дабл
         }
-
-        return result;
+       return res;
     }
 
-    public static void printArray(double[] array) {
-        for (double value : array) {
-            System.out.print(value+" ");
+    static void printArray(double[ ] arr){
+        for (double g : arr) {
+            System.out.print(g+" ");
         }
         System.out.println();
-
     }
 
-    public static void printArray(double[] array, String name, int cloCount) {
-        for (int i = 0; i < array.length; i++) {
-            System.out.printf("%s[% 3d]=%-10.5f",name,i,array[i]);
-            if ((i+1)%cloCount==0 || i== array.length-1);{
+    static void printArray(double[ ] arr, String name, int columnCount){
+        for (int i = 0; i < arr.length; i++) {
+            System.out.printf("%s[% -3d]=% -7.4f ",name,i, arr[i]);
+            if ((i+1)%columnCount==0 || i+1== arr.length)
                 System.out.println();
-            }
-
         }
-
-
     }
+
+
+
+
+
+
+
+
+
 }
+
+
+
+
+
+
+
+

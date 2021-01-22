@@ -5,7 +5,8 @@ import by.it.HomeWork;
 import org.junit.Test;
 
 import java.lang.reflect.Constructor;
-import static org.junit.Assert.*;
+
+import static org.junit.Assert.assertEquals;
 
 @SuppressWarnings("all")
 
